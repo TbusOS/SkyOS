@@ -267,7 +267,8 @@ void uart_putc(char c) {
 - [ARM PL011 UART TRM DDI 0183G](https://developer.arm.com/documentation/ddi0183/latest/)
 
 ### 工具文档
-- [QEMU ARM System Emulation](https://qemu.readthedocs.io/en/latest/system/arm/virt.html)
+- [QEMU ARM System Emulation](https://www.qemu.org/docs/master/system/target-arm.html)
+- [QEMU virt machine](https://qemu-project.gitlab.io/qemu/system/arm/virt.html)
 - [GCC ARM Embedded Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm)
 
 ### 学习资源

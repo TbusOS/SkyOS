@@ -16,7 +16,8 @@
 ### QEMU virt machine官方文档
 
 **主要参考文档**:
-- **QEMU官方文档**: https://qemu.readthedocs.io/en/latest/system/arm/virt.html
+- **QEMU ARM系统仿真**: https://www.qemu.org/docs/master/system/target-arm.html
+- **QEMU virt machine专页**: https://qemu-project.gitlab.io/qemu/system/arm/virt.html
 - **QEMU源码仓库**: https://gitlab.com/qemu-project/qemu
 - **QEMU源码文件**: `hw/arm/virt.c` (定义内存映射)
 - **ARM Cortex-A15 TRM**: ARM Technical Reference Manual
