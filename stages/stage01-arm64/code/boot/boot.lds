@@ -1,15 +1,15 @@
 /*
- * SkyOS ARM32 链接脚本
+ * SkyOS ARM64 链接脚本
  * 文件: boot/boot.lds
  * 
- * 定义内核的内存布局：
+ * 定义ARM64内核的内存布局：
  * - 异常向量表在0x40000000 (QEMU virt machine的入口)
  * - 代码段、数据段、BSS段的安排
  */
 
 ENTRY(_start)
 
-/* 内存布局 - QEMU virt machine */
+/* 内存布局 - QEMU virt machine ARM64 */
 MEMORY
 {
     /* RAM: 256MB starting at 0x40000000 */
@@ -31,13 +31,13 @@ SECTIONS
     .text : {
         *(.text*)
         *(.rodata*)
-        . = ALIGN(4);
+        . = ALIGN(8);
     } > RAM
     
     /* 数据段 */
     .data : {
         *(.data*)
-        . = ALIGN(4);
+        . = ALIGN(8);
     } > RAM
     
     /* BSS段 (未初始化数据) */
@@ -45,7 +45,7 @@ SECTIONS
         __bss_start = .;
         *(.bss*)
         *(COMMON)
-        . = ALIGN(4);
+        . = ALIGN(8);
         __bss_end = .;
     } > RAM
     
@@ -64,5 +64,6 @@ SECTIONS
         *(.comment)
         *(.note*)
         *(.ARM.attributes)
+        *(.eh_frame*)
     }
 } 
