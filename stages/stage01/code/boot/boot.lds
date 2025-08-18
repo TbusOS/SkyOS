@@ -1,5 +1,5 @@
 /*
- * SkyOS ARM32 链接脚本
+ * SkymOS ARM32 链接脚本
  * 文件: boot/boot.lds
  * 
  * 定义内核的内存布局：

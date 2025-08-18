@@ -1,5 +1,5 @@
 /*
- * SkyOS ARM64 链接脚本
+ * SkymOS ARM64 链接脚本
  * 文件: boot/boot.lds
  * 
  * 定义ARM64内核的内存布局：
