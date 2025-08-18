@@ -1,11 +1,11 @@
 /*
- * SkyOS硬件地址定义
+ * SkymOS硬件地址定义
  * 自动生成于设备树分析
  * 请勿手动修改此文件
  */
 
-#ifndef _SKYOS_HARDWARE_H_
-#define _SKYOS_HARDWARE_H_
+#ifndef _SKYMOS_HARDWARE_H_
+#define _SKYMOS_HARDWARE_H_
 
 #include <stdint.h>
 
@@ -43,4 +43,4 @@
 #define GPIO_IRQ          39                /* ARM PL061 GPIO控制器 */
 #define VIRTIO_MMIO_IRQ          48                /* VirtIO MMIO设备 */
 
-#endif /* _SKYOS_HARDWARE_H_ */
+#endif /* _SKYMOS_HARDWARE_H_ */

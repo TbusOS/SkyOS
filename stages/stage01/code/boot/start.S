@@ -1,8 +1,8 @@
 /*
- * SkyOS ARM32 启动代码
+ * SkymOS ARM32 启动代码
  * 文件: boot/start.S
  * 
- * 这是SkyOS的第一个执行的代码，负责：
+ * 这是SkymOS的第一个执行的代码，负责：
  * 1. 设置异常向量表
  * 2. 初始化堆栈
  * 3. 跳转到C语言main函数

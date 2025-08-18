@@ -1,12 +1,6 @@
 /*
- * SkyOS ARM32 主函数
- * 文件: kernel/main.c
- * 
- * 这是内核的C语言入口点，在ARM汇编启动代码完成后调用
- * 功能：
- * 1. 初始化UART串口
- * 2. 输出欢迎信息
- * 3. 演示基本的ARM32功能
+ * SkymOS ARM32 主函数
+ * 这是内核的入口点，从boot.S调用
  */
 
 #include <stdint.h>
@@ -91,7 +85,7 @@ int main(void) {
     /* 输出启动信息 */
     uart_puts("\r\n");
     uart_puts("======================================\r\n");
-    uart_puts("    SkyOS - ARM32 教学操作系统\r\n");
+    uart_puts("    SkymOS - ARM32 教学操作系统\r\n");
     uart_puts("======================================\r\n");
     uart_puts("版本: 0.1.0 (教学演示版)\r\n");
     uart_puts("架构: ARM Cortex-A15\r\n");
@@ -137,7 +131,7 @@ int main(void) {
     while (1) {
         uart_puts("心跳 #");
         uart_put_hex(counter++);
-        uart_puts(" - SkyOS 正在运行!\r\n");
+        uart_puts(" - SkymOS 正在运行!\r\n");
         
         /* 延时约1秒 */
         delay(1000000);

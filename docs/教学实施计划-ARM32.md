@@ -1,4 +1,4 @@
-# SkyOS ARM32教学实施计划
+# SkymOS ARM32教学实施计划
 
 ## 📋 总体实施策略
 
@@ -58,7 +58,7 @@
 3. **UART输出实现**
    - 配置QEMU virt machine的UART
    - 实现字符串输出函数
-   - 显示"Hello SkyOS on ARM32!"
+   - 显示"Hello SkymOS on ARM32!"
 
 #### 实验指导
 - **实验1**: 编写最小ARM启动代码

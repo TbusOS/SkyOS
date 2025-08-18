@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-SkyOS硬件规格分析工具
+SkymOS硬件规格分析工具
 用于解析QEMU virt machine的硬件配置并生成易于理解的报告
 
 使用方法:
@@ -206,7 +206,7 @@ class HardwareAnalyzer:
         
         # 标题
         report.append("╔════════════════════════════════════════════════════════════════════════════════╗")
-        report.append("║                           SkyOS硬件规格分析报告                                ║")
+        report.append("║                           SkymOS硬件规格分析报告                                ║")
         report.append("╚════════════════════════════════════════════════════════════════════════════════╝")
         report.append("")
         
@@ -287,13 +287,13 @@ class HardwareAnalyzer:
         """生成C头文件"""
         header = []
         header.append("/*")
-        header.append(" * SkyOS硬件地址定义")
+        header.append(" * SkymOS硬件地址定义")
         header.append(" * 自动生成于设备树分析")
         header.append(" * 请勿手动修改此文件")
         header.append(" */")
         header.append("")
-        header.append("#ifndef _SKYOS_HARDWARE_H_")
-        header.append("#define _SKYOS_HARDWARE_H_")
+        header.append("#ifndef _SKYMOS_HARDWARE_H_")
+        header.append("#define _SKYMOS_HARDWARE_H_")
         header.append("")
         header.append("#include <stdint.h>")
         header.append("")
@@ -317,7 +317,7 @@ class HardwareAnalyzer:
                 header.append(f"#define {name_upper}_IRQ          {interrupt.irq_num}                /* {interrupt.description} */")
         
         header.append("")
-        header.append("#endif /* _SKYOS_HARDWARE_H_ */")
+        header.append("#endif /* _SKYMOS_HARDWARE_H_ */")
         
         return "\n".join(header)
 

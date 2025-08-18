@@ -1,5 +1,5 @@
 /*
- * SkyOS ARM64启动代码
+ * SkymOS ARM64启动代码
  * 文件: boot/start.S
  * 
  * ARM64 (AArch64) 启动汇编代码

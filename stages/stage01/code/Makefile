@@ -1,4 +1,4 @@
-# SkyOS ARM32 Makefile
+# SkymOS ARM32 Makefile
 # 教学类操作系统构建脚本
 
 # 架构配置
@@ -35,9 +35,9 @@ KERNEL_OBJECTS = $(KERNEL_SOURCES:$(KERNEL_DIR)/%.c=$(BUILD_DIR)/%.o)
 ASM_OBJECTS = $(ASM_SOURCES:$(KERNEL_DIR)/%.S=$(BUILD_DIR)/%.o)
 
 # 最终目标
-KERNEL_ELF = $(BUILD_DIR)/skyos.elf
-KERNEL_BIN = $(BUILD_DIR)/skyos.bin
-KERNEL_IMG = $(BUILD_DIR)/skyos.img
+KERNEL_ELF = $(BUILD_DIR)/skymos.elf
+KERNEL_BIN = $(BUILD_DIR)/skymos.bin
+KERNEL_IMG = $(BUILD_DIR)/skymos.img
 
 # QEMU配置
 QEMU = qemu-system-arm
@@ -85,7 +85,7 @@ $(KERNEL_IMG): $(KERNEL_BIN)
 
 # 在QEMU中运行
 run: $(KERNEL_BIN)
-	@echo "Running SkyOS in QEMU..."
+	@echo "Running SkymOS in QEMU..."
 	@$(QEMU) $(QEMU_FLAGS)
 
 # 调试模式
@@ -96,18 +96,18 @@ debug: $(KERNEL_BIN)
 
 # 反汇编
 disasm: $(KERNEL_ELF)
-	@$(OBJDUMP) -d $< > $(BUILD_DIR)/skyos.disasm
-	@echo "Disassembly saved to $(BUILD_DIR)/skyos.disasm"
+	@$(OBJDUMP) -d $< > $(BUILD_DIR)/skymos.disasm
+	@echo "Disassembly saved to $(BUILD_DIR)/skymos.disasm"
 
 # 显示符号表
 symbols: $(KERNEL_ELF)
-	@$(OBJDUMP) -t $< > $(BUILD_DIR)/skyos.symbols
-	@echo "Symbols saved to $(BUILD_DIR)/skyos.symbols"
+	@$(OBJDUMP) -t $< > $(BUILD_DIR)/skymos.symbols
+	@echo "Symbols saved to $(BUILD_DIR)/skymos.symbols"
 
 # 生成SD卡镜像 (用于真实硬件)
 sdcard: $(KERNEL_IMG)
 	@echo "Creating SD card image..."
-	@dd if=/dev/zero of=$(BUILD_DIR)/skyos.sdcard bs=1M count=64
+	@dd if=/dev/zero of=$(BUILD_DIR)/skymos.sdcard bs=1M count=64
 	@echo "Copy $(KERNEL_IMG) to SD card"
 
 # 检查工具链
@@ -124,7 +124,7 @@ clean:
 
 # 帮助信息
 help:
-	@echo "SkyOS ARM32 Build System"
+	@echo "SkymOS ARM32 Build System"
 	@echo ""
 	@echo "Targets:"
 	@echo "  all          - Build kernel image"
