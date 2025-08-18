@@ -1,19 +1,19 @@
-# SkyOS ARM32 Makefile
-# 教学类操作系统构建脚本
+# SkyOS ARM32 Makefile - 阶段2：异常处理与中断
+# ARM32教学类操作系统构建脚本
 
 # 架构配置
-ARCH ?= arm32
+ARCH ?= arm
 TARGET = arm-none-eabi
 
 # 交叉编译工具链
 CC = $(TARGET)-gcc
-AS = $(TARGET)-as  
+AS = $(TARGET)-as
 LD = $(TARGET)-ld
 OBJCOPY = $(TARGET)-objcopy
 OBJDUMP = $(TARGET)-objdump
 
 # 编译标志
-CFLAGS = -mcpu=cortex-a15 -marm -ffreestanding -nostdlib -nostartfiles \
+CFLAGS = -mcpu=cortex-a15 -ffreestanding -nostdlib -nostartfiles \
          -Wall -Wextra -g -O2 -fno-stack-protector
 ASFLAGS = -mcpu=cortex-a15 -g
 LDFLAGS = -T boot/boot.lds -nostdlib
@@ -46,9 +46,22 @@ QEMU_FLAGS = -machine virt -cpu cortex-a15 -m 256M -nographic \
 QEMU_DEBUG_FLAGS = $(QEMU_FLAGS) -s -S
 
 # 默认目标
-.PHONY: all clean run debug help
+.PHONY: all clean run debug help stage2-info
 
-all: $(KERNEL_IMG)
+all: stage2-info $(KERNEL_IMG)
+
+# 阶段2信息
+stage2-info:
+	@echo "======================================"
+	@echo "  SkyOS 阶段2：异常处理与中断"
+	@echo "======================================"
+	@echo "新增功能："
+	@echo "  ✓ 完整的异常向量表"
+	@echo "  ✓ 异常处理程序框架"
+	@echo "  ✓ 系统调用机制(SVC)"
+	@echo "  ✓ 中断控制(enable/disable)"
+	@echo "  ✓ 异常和系统调用统计"
+	@echo "======================================"
 
 # 创建构建目录
 $(BUILD_DIR):
@@ -84,12 +97,13 @@ $(KERNEL_IMG): $(KERNEL_BIN)
 	@cp $< $@
 
 # 在QEMU中运行
-run: $(KERNEL_BIN)
-	@echo "Running SkyOS in QEMU..."
+run: $(KERNEL_ELF)
+	@echo "Running SkyOS Stage2 in QEMU..."
+	@echo "Features: Exception handling, System calls, Interrupt control"
 	@$(QEMU) $(QEMU_FLAGS)
 
 # 调试模式
-debug: $(KERNEL_BIN)
+debug: $(KERNEL_ELF)
 	@echo "Starting QEMU in debug mode..."
 	@echo "Connect with: arm-none-eabi-gdb -ex 'target remote localhost:1234' $(KERNEL_ELF)"
 	@$(QEMU) $(QEMU_DEBUG_FLAGS)
@@ -112,10 +126,23 @@ sdcard: $(KERNEL_IMG)
 
 # 检查工具链
 check-toolchain:
-	@echo "Checking ARM toolchain..."
-	@which $(CC) || (echo "ARM toolchain not found. Install with: sudo apt-get install gcc-arm-none-eabi"; exit 1)
-	@which $(QEMU) || (echo "QEMU not found. Install with: sudo apt-get install qemu-system-arm"; exit 1)
+	@echo "Checking ARM32 toolchain..."
+	@which $(CC) || (echo "ARM32 toolchain not found. Install with: brew install arm-none-eabi-gcc"; exit 1)
+	@which $(QEMU) || (echo "QEMU not found. Install with: brew install qemu"; exit 1)
 	@echo "Toolchain check passed!"
+
+# 显示构建信息
+info: stage2-info
+	@echo ""
+	@echo "Source files:"
+	@echo "  Boot: $(BOOT_SOURCES)"
+	@echo "  Kernel: $(KERNEL_SOURCES)"
+	@echo "  ASM: $(ASM_SOURCES)"
+	@echo ""
+	@echo "Object files:"
+	@echo "  Boot: $(BOOT_OBJECTS)"
+	@echo "  Kernel: $(KERNEL_OBJECTS)"
+	@echo "  ASM: $(ASM_OBJECTS)"
 
 # 清理
 clean:
@@ -124,7 +151,7 @@ clean:
 
 # 帮助信息
 help:
-	@echo "SkyOS ARM32 Build System"
+	@echo "SkyOS Stage2 Build System"
 	@echo ""
 	@echo "Targets:"
 	@echo "  all          - Build kernel image"
@@ -133,12 +160,17 @@ help:
 	@echo "  disasm       - Generate disassembly"
 	@echo "  symbols      - Generate symbol table"
 	@echo "  sdcard       - Create SD card image"
+	@echo "  info         - Show build information"
 	@echo "  check-toolchain - Check if tools are installed"
 	@echo "  clean        - Remove build files"
 	@echo "  help         - Show this help"
 	@echo ""
-	@echo "Environment variables:"
-	@echo "  ARCH=arm32   - Target architecture (default)"
+	@echo "Stage2 Features:"
+	@echo "  - Complete exception vector table"
+	@echo "  - Exception handling framework"
+	@echo "  - System call mechanism (SVC)"
+	@echo "  - Interrupt control functions"
+	@echo "  - Exception and syscall statistics"
 	@echo ""
 	@echo "Examples:"
 	@echo "  make all              # Build everything"
